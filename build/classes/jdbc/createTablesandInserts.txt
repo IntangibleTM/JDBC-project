@@ -1,0 +1,32 @@
+create table WritingGroups (
+    GroupName      varchar(20) not null,
+    HeadWriter       varchar(20),
+    YearFormed          integer,
+    Subject         varchar(20),
+constraint        writinggroups_pk primary key(GroupName)
+);
+
+create table Books (
+GroupName varchar(20)not null,
+PublisherName varchar(20)not null,
+BookTitle varchar(20) not null,
+YearPublished     integer,
+NumberPages       integer,
+constraint      books_fk01 foreign key
+(GroupName) references WritingGroups(GroupName),
+constraint      books_fk02 foreign key
+(PublisherName) references Publishers(PublisherName),
+constraint      orders_pk primary key (GroupName,BookTitle)
+);
+
+create table Publishers (
+    PublisherName      varchar(20) not null,
+    PublisherAddress       varchar(20),
+    PublisherPhone          integer,
+    PublisherEmail         varchar(20),
+    constraint      publishers_pk unique(PublisherName)
+);
+
+INSERT INTO WritingGroups (GroupName,HeadWriter,YearFormed,Subject) VALUES ('GroupT','Marco',2011,'English');
+INSERT INTO Publishers (PublisherName,PublisherAddress,PublisherPhone,PublisherEmail) VALUES ('Greece','75335 Wood St.',12343924,'greece@gmail.com');
+INSERT INTO Books (GroupName,BookTitle,PublisherName,YearPublished,NumberPages) VALUES ('GroupT','Moby Dick','Greece',2000,23);

@@ -1,0 +1,7 @@
+select au_fname,au_lname
+from authors inner join
+(select au_id
+from titles natural join authors
+where sales=(
+select max(sales)from titles)) au_sales
+using (au_id);
